@@ -1,3 +1,3 @@
 [submodule "daemon"]
 	path = daemon
-	url = https://github.com/DanSeraf/torchat
+	url = https://github.com/framecca/torchat

@@ -28,20 +28,22 @@ class Gui:
         self.aboutdialog = self.builder.get_object("aboutdialog1")
         # TextBuffer 
         self.chatEntry = self.builder.get_object("chatEntry")
-        model = Gtk.ListStore (str)
-        model.append(['nigga'])
-        self.treeview = Gtk.TreeView(model)
+        self.model = Gtk.ListStore (str)
+        self.treeview = Gtk.TreeView(self.model)
         self.treeview = self.builder.get_object("treeView")
-        self.treeview.set_model(model)
+        self.treeview.set_model(self.model)
         render1 = Gtk.CellRendererText()
-        column1 = Gtk.TreeViewColumn("unoacaso", render1, text = 0)
+        column1 = Gtk.TreeViewColumn("peers", render1, text = 0)
         self.treeview.append_column(column1)
         self.textBox = self.builder.get_object("textBox")
 
 
         t = Gtk.TextBuffer()
-        t.set_text('tnoeu')
+        t.set_text('tnoeu\nnigga')
         self.textBox.set_buffer(t)
+
+    def add_peer(self, id):
+        self.model.append((id))
 
     def on_gtk_about_activate(self, menuitem, data=None):
         self.response = self.aboutdialog.run()
