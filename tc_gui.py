@@ -44,7 +44,7 @@ class Gui:
         column1 = Gtk.TreeViewColumn("peers", render1, text = 0)
         self.treeview.append_column(column1)
         self.textBox = self.builder.get_object("textBox")
-        GObject.timeout_add(500, self.updateClient)
+        GObject.timeout_add(2000, self.updateClient)
 
     def updateClient(self):
         print (run_coro(self.client.getLastMessageFromDaemon))
@@ -78,9 +78,11 @@ class Gui:
         pass
 
     def on_chatentry_activate(self, *args, **kwargs):
-        print (self.chatEntry.get_text())
+        text = self.chatEntry.get_text()
         self.chatEntry.set_text('')
-        self.session.sendMessageToPeer
+        # TODO implement some sort of state machine 
+        run_coro(self.client.sendMessageToPeer, text, 'test.onion', 8000)
+
     def on_chatentry_changed(self, *args, **kwargs):
         pass
 
